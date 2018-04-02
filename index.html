@@ -1,6 +1,6 @@
 ---
 layout: page
-description: "Boilerplate of Hux Blog"
+description: "Pinasterist's Blog"
 ---
 
 {% for post in paginator.posts %}
@@ -26,7 +26,7 @@ description: "Boilerplate of Hux Blog"
 {% endfor %}
 
 <!-- Pager -->
-{% if paginator.total_pages > 1 %}
+{% if paginator.total_pages != 1 %}
 <ul class="pager">
     {% if paginator.previous_page %}
     <li class="previous">
