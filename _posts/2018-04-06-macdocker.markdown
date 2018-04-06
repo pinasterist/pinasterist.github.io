@@ -87,6 +87,15 @@ vagrant up
 ```shell
 ssh-copy-id -i ~/.ssh/id_rsa.debians.pub vagrant@docker
 ```
+```shell
+vi ~/.ssh/config
+```
+```
+Host docker
+  User vagrant
+  HostName docker
+  IdentityFile ~/.ssh/id_rsa.debians
+```
 
 第三步：配置mac主机
 - 安装软件
