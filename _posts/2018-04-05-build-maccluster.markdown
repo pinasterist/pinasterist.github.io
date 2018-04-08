@@ -177,21 +177,21 @@ iface enp0s3 inet dhcp
 allow-hotplug enp0s8
 iface enp0s8 inet dhcp
 ```
-
     更改apt repo参数
     ```shell
 vi /etc/apt/sources.list
 ```
-```
+    在sources.list文件中加入下列一行
+    ```
 deb http://ftp.debian.org/debian stretch-backports main contrib
 ```
-安装virtualbox client
-```shell
+    安装virtualbox client
+    ```shell
 apt update
 apt install virtualbox-guest-utils
 ```
 - 以vagrant身份登入debian9，然后执行下面的命令：
-```shell
+    ```shell
 mkdir .ssh
 cd ~/.ssh
 wget http://github.com/mitchellh/vagrant/raw/master/keys/vagrant
@@ -201,24 +201,26 @@ chmod 600 vagrant
 chmod 600 authorized_keys
 ```
 - 最后清理并关闭虚拟机
-```shell
+    ```shell
 sudo apt-get clean
 sudo poweroff
 ```
+
 4. 制作debian9镜像文件
-```shell
+    ```shell
 vagrant package --output debian9.box --base debian9
 vagrant box add --name debian9 ./debian9.box
 ```
 
 第四步：配置并启动集群
 - 编辑集群文件
-```shell
+    ```shell
 mkdir -p vagrant/debians
 cd vagrant/debians
 vi Vagrantfile
 ```
-```
+    在Vagrantfile中加入下列文本
+    ```
 Vagrant.configure("2") do |config|
   config.vm.box = "debian9"
   config.vm.provision "shell", run: "always" do |s|
@@ -266,35 +268,34 @@ Vagrant.configure("2") do |config|
   end
 end
 ```
-启动集群
-```shell
+    启动集群
+    ```shell
 vagrant up debian01
 vagrant up debian02
 vagrant up debian03
 vagrant up debian04
 vagrant up debian05
 ```
-*如果不提供名字，默认只启动第一个*
+    *如果不提供名字，默认只启动第一个*
 
 第五步：其它配置
 - 更新hosts文件
-```shell
+    ```shell
 sudo vi /etc/hosts
 ```
-```
+    在hosts中添加下列文本
+    ```
 192.168.98.101  debian01
 192.168.98.102  debian02
 192.168.98.103  debian03
 192.168.98.104  debian04
 192.168.98.105  debian05
-```
-直接登录虚拟主机
-```shell
-ssh vagrant@debian01
-```
-免密码登录设置
-```shell
+    ```
+    这样我就可以用命令```ssh vagrant@debian01```直接登录虚拟主机。
+
+- 免密码登录设置
+    ```shell
 ssh-copy-id -i ~/.ssh/id_rsa.debians.pub vagrant@debian01
 ```
 
-到这里我们得到了由5台虚拟机组成的虚拟集群。接下来，我们可以安装集群管理软件来管理它们，例如puppet，chef，ansible等等。
+到这里我就得到了由5台虚拟机组成的虚拟集群。接下来，我可以安装集群管理软件来管理它们，例如puppet，chef，ansible等等。
