@@ -4,7 +4,7 @@ title:      "老白是如何改造博客的"
 subtitle:   "从一无所知到略有小成"
 date:       2018-04-02
 author:     "pinasterist"
-header-img: "img/post-bg-2015.jpg"
+header-img: "img/post-bg-blog.jpg"
 tags:
     - blog
 ---
