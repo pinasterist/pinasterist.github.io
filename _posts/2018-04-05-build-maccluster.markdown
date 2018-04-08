@@ -17,11 +17,11 @@ tags:
 第一步：安装软件
 
 1. 安装brew
-```shell
+    ```shell
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
-加速brew
-```shell
+    加速brew
+    ```shell
 cd "$(brew --repo)"
 git remote set-url origin https://mirrors.ustc.edu.cn/brew.git
 cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
@@ -31,50 +31,57 @@ source ~/.zshrc
 ```
 
 2. 安装cask
-```shell
+    ```shell
 brew tap caskroom/cask
 ```
-加速cask
-```shell
+    加速cask
+    ```shell
 cd "$(brew --repo)"/Library/Taps/caskroom/homebrew-cask
 git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask.git
 ```
+
 3. 安装vagrant
-```shell
+    ```shell
 brew install vagrant
 ```
+
 4. 安装dnsmasq
-```shell
+    ```shell
 brew install dnsmasq
 ```
+
 5. 安装virtualbox
-```shell
+    ```shell
 brew cask install virtualbox
 ```
 
 第二步：配置dns
 
 1. 创建hostonly适配器
-```shell
+    ```shell
 VBoxManage hostonlyif create
 VBoxManage hostonlyif ipconfig vboxnet0 --ip 192.168.98.1 --netmask 255.255.255.0
 ```
-*注意：请确保创建的是vboxnet0。*
+    *注意：请确保创建的是vboxnet0。*
+
 2. 停止bootd服务
-```shell
+    ```shell
 launchctl unload /System/Library/LaunchDaemons/bootps.plist
 ```
+
 3. 删除Virtualbox内置的dhcp服务器
-```shell
+    ```shell
 VBoxManage list dhcpservers
 VBoxManage dhcpserver remove --netname HostInterfaceNetworking-vboxnet0
 ```
+
 4. 配置DNS
-```shell
+    ```shell
 mv /usr/local/etc/dnsmasq.conf /usr/local/etc/dnsmasq.conf.back
 vi /usr/local/etc/dnsmasq.conf
 ```
-```shell
+    在dnsmasq.conf中写入下列文字
+    ```shell
 interface=vboxnet0
 except-interface=lo0
 bind-interfaces
@@ -88,19 +95,23 @@ dhcp-host=debian03,192.168.98.103,infinite
 dhcp-host=debian04,192.168.98.104,infinite
 dhcp-host=debian05,192.168.98.105,infinite
 ```
+
 5. 重启dnsmasq
-```shell
+    ```shell
 brew services restart dnsmasq
 ```
+
 6. 打开macos的ip转发
-```shell
+    ```shell
 sysctl -w net.ipv4.ip_forward = 1
 ```
+
 7. 打开macos的nat
-```shell
+    ```shell
 vi /etc/pf.conf
 ```
-```
+    在pf.conf文件中加入下列带注释的文本
+    ```
 scrub-anchor "com.apple/*"
 nat-anchor "com.apple/*"
 nat on en0 from vboxnet0:network to any -> (en0)  # insert this line
@@ -111,8 +122,8 @@ anchor "com.apple/*"
 load anchor "com.apple" from "/etc/pf.anchors/com.apple"
 pass from 192.168.98.0/24 to any keep state       # insert this line
 ```
-执行下列命令使之生效
-```shell
+    执行下列命令使之生效
+    ```shell
 pfctl -d
 pfctl -f /etc/pf.conf
 pfctl -e
@@ -121,48 +132,54 @@ pfctl -e
 第三步：准备box文件
 
 1. 下载debian9的iso
-```shell
+    ```shell
 wget http://mirrors.163.com/debian-cd/current/amd64/iso-cd/debian-9.4.0-amd64-netinst.iso
 ```
+
 2. 安装debian9
 - 虚拟机的名字是debian9
 - 确保只有一个网卡，且该网卡是NAT类型
 - 设置root密码为vagrant
 - 创建普通用户vagrant，并设置密码为vagrant
+
 3. 配置debian9
 - 以root身份登入debian9，然后执行下面的命令：
-```shell
+    ```shell
 groupadd admin
-usermod -G admin vagrant
+usermod -a admin vagrant
 apt-get install sudo
 ```
-更改grub参数
-```shell
+    更改grub参数
+    ```shell
 vi /boot/grub/grub.cfg
 ```
-```
+    在grub.cfg文件中修改对应下列文本的相应行
+    ```
 set timeout=1
 ```
-更改sudo参数
-```shell
+    更改sudo参数
+    ```shell
 vi /etc/sudoers
 ```
-```
+    在sudoers文件中加入下列文本
+    ```
 Defaults env_keep="SSH_AUTH_SOCK"
 %admin ALL=NOPASSWD: ALL
 ```
-更改network参数
-```shell
+    更改network参数
+    ```shell
 vi /etc/network/interfaces
 ```
-```
+    在interfaces文件中加入下面的文本
+    ```
 auto enp0s3
 iface enp0s3 inet dhcp
 allow-hotplug enp0s8
 iface enp0s8 inet dhcp
 ```
-更改apt repo参数
-```shell
+
+    更改apt repo参数
+    ```shell
 vi /etc/apt/sources.list
 ```
 ```
