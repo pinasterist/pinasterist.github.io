@@ -279,7 +279,7 @@ vagrant up debian05
     *如果不提供名字，默认只启动第一个*
 
 第五步：其它配置
-- 更新hosts文件
+1. 更新hosts文件
     ```shell
 sudo vi /etc/hosts
 ```
@@ -293,7 +293,7 @@ sudo vi /etc/hosts
     ```
     这样我就可以用命令```ssh vagrant@debian01```直接登录虚拟主机。
 
-- 免密码登录设置
+2. 免密码登录设置
     ```shell
 ssh-copy-id -i ~/.ssh/id_rsa.debians.pub vagrant@debian01
 ```

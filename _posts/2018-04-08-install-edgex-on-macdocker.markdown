@@ -44,6 +44,10 @@ docker-compose up -d rulesengine
 docker-compose up -d device-virtual
 ```
 
+5. 打开consule查看微服务状态
+
+    在浏览器中打开http://docker:8500/ui，查看微服务状态。
+
 *说明*
 - 目前edgex的稳定版是barcelona，如果想尝试最新版，将**docker-compose-barcelona-0.2.1.yml**换成**docker-compose-preview-california-0.5.1.yml**。
 - 启动微服务时不能太快，两条启动命令之间要有时间间隔。官网上建议是1分钟，实际操作不用这么长，一般15秒差不多了，取决于机器的性能。
