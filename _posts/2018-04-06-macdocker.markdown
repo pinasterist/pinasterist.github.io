@@ -77,7 +77,7 @@ echo "ExecStart=" >> /etc/systemd/system/docker.service.d/override.conf
 echo "ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2376" >> /etc/systemd/system/docker.service.d/override.conf
 systemctl daemon-reload
 systemctl restart docker.service
-usermod -a docker vagrant
+usermod -a -G docker vagrant
 ```
 - 启动docker主机
 ```shell
