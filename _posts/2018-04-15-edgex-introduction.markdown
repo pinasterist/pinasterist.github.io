@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "edgex foundry简单介绍"
+title:      "Edgex foundry简单介绍"
 subtitle:   "edgex，第一个边缘IoT系统"
 date:       2018-04-15
 author:     "pinasterist"
