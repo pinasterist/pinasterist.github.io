@@ -14,7 +14,7 @@ tags:
 
 现在的后台软件动不动就需要用到集群，因此在开发机上搭建一套虚拟的集群系统就很有必要了。这里，我就说一下我是如何在MacBookPro上做这件事情。
 
-第一步：安装软件
+### 第一步：安装软件
 
 1. 安装brew
     ```shell
@@ -55,7 +55,7 @@ brew install dnsmasq
 brew cask install virtualbox
 ```
 
-第二步：配置dns
+### 第二步：配置dns
 
 1. 创建hostonly适配器
     ```shell
@@ -129,7 +129,7 @@ pfctl -f /etc/pf.conf
 pfctl -e
 ```
 
-第三步：准备box文件
+### 第三步：准备box文件
 
 1. 下载debian9的iso
     ```shell
@@ -212,7 +212,7 @@ vagrant package --output debian9.box --base debian9
 vagrant box add --name debian9 ./debian9.box
 ```
 
-第四步：配置并启动集群
+### 第四步：配置并启动集群
 - 编辑集群文件
     ```shell
 mkdir -p vagrant/debians
@@ -278,7 +278,7 @@ vagrant up debian05
 ```
     *如果不提供名字，默认只启动第一个*
 
-第五步：其它配置
+### 第五步：其它配置
 1. 更新hosts文件
     ```shell
 sudo vi /etc/hosts
