@@ -16,7 +16,7 @@ tags:
 macos基于freebsd，与linux有很大不同，所以得费点功夫才能把macos折腾得舒服点。  
 这里我把调配工作环境的过程写下来，算是一个记录。
 
-第一步：安装软件
+### 第一步：安装软件
 1. 安装brew
     ```shell
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -113,7 +113,7 @@ plugins=(zsh-autosuggestions)
 brew install stow
 ```
 
-第二步：配置软件
+### 第二步：配置软件
 1. 配置zsh  
     - 更改颜色方案为agnoster
     ```shell
@@ -136,7 +136,7 @@ sudo vi /etc/shells
 chsh -s /usr/local/bin/zsh
 ```
 
-2. 配置oh-my-zsh
+2. 配置oh-my-zsh  
     添加有用的插件
     ```
 plugins=(git history z tmux vagrant zsh-autosuggestions)
