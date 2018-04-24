@@ -154,19 +154,39 @@ vi ~/.tmux.conf
 set -g prefix `
 unbind C-b
 bind ` send-prefix
+
 set-option -g base-index 1
+set-option -g renumber-windows on
+set-option -g set-titles on
+
+set-window-option -g automatic-rename on
+
+bind-key r source-file ~/.tmux.conf \; display "Reloaded!"
+
 unbind-key '"'
 bind-key - splitw -v -c '#{pane_current_path}'
 unbind-key %
-bind-key \ splitw -h -c '#{pane_current_path}'
-bind-key r source-file ~/.tmux.conf \; display "Reloaded!"
-bind-key k select-pane -U
-bind-key j select-pane -D
-bind-key h select-pane -L
-bind-key l select-pane -R
+bind-key \ splitw -h -c '#{pane_current_path}' 
+
+bind-key = select-pane -U
+bind-key "'" select-pane -D
+bind-key [ select-pane -L
+bind-key ] select-pane -R
+
+bind-key -n M-= resize-pane -U
+bind-key -n M-"'" resize-pane -D
+bind-key -n M-[ resize-pane -L
+bind-key -n M-] resize-pane -R
+
+bind-key -n M-- set-option synchronize-panes
+bind-key -n M-\ resize-pane -Z
+
 bind-key TAB select-window -l
-bind-key -n M-Left previous-window
-bind-key -n M-Right next-window
+bind-key -n M-, previous-window
+bind-key -n M-. next-window
+bind-key -n M-< swap-window -t -1
+bind-key -n M-> swap-window -t +1
+
 bind-key 1 select-window -t 1
 bind-key 2 select-window -t 2
 bind-key 3 select-window -t 3
@@ -177,6 +197,12 @@ bind-key 7 select-window -t 7
 bind-key 8 select-window -t 8
 bind-key 9 select-window -t 9
 bind-key 0 select-window -t 0
+
+set -g @plugin 'jimeh/tmux-themepack'
+set -g @themepack 'powerline/double/magenta'
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+run '~/.tmux/plugins/tpm/tpm'
 ```
 
 4. 配置dotfiles  
