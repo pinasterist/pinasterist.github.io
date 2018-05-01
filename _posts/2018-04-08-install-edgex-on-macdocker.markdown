@@ -36,7 +36,7 @@ docker-compose up -d logging
 docker-compose up -d notifications
 docker-compose up -d metadata
 docker-compose up -d data
-docker-compose up -d command
+docker-compose up -d command   
 docker-compose up -d scheduler
 docker-compose up -d export-client
 docker-compose up -d export-distro
