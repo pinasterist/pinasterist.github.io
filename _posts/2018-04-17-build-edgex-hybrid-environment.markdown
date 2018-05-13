@@ -13,21 +13,18 @@ tags:
 Edgex是有20多个微服务构成。绝大部分情况下，开发者只会与一个或若干个微服务打交道，而无需下载所有的源代码。对于不用涉及的微服务，直接用二进制包来辅助测试就可以了。Edgex管这样的编程环境为Hybrid Environment。现在就以device-virtual为例讲讲这个环境如何搭建。
 
 ### 第一步：安装edgex
-请参看文章[在mac docker上安装edgex foundry](http://blog.pinasterist.ml/2018/04/08/install-edgex-on-macdocker)。
+请参看文章[在mac docker上安装edgex foundry](http://blog.pinasterist.ml/2018/04/08/install-edgex-on-macdocker)。  
+___注意：不要启动device-virtual。___
 
-### 第二步：关闭device-virtual
-
-```shell
-docker-compose stop device-virtual
-```
-
-### 第三步：克隆device-virtual代码
+### 第二步：克隆device-virtual代码
 
 ```shell
 git clone https://github.com/edgexfoundry/device-virtual.git
 ```
 
-### 第四步：修改代码
+### 第三步：修改代码
+
+___注意：必须和edgex的安装版本一致。这里我用的版本是barcelona。___
 
 ```shell
 cd device-virtual
@@ -54,7 +51,7 @@ vi src/main/resources/application.properties
 ```
 将所有localhost替换成192.168.98.201。
 
-### 第五步：编译并启动程序
+### 第四步：编译并启动程序
 
 ```shell
 mvn clean package
