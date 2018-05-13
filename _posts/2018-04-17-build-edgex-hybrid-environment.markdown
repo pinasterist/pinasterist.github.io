@@ -31,6 +31,7 @@ git clone https://github.com/edgexfoundry/device-virtual.git
 
 ```shell
 cd device-virtual
+git checkout -b barcelona origin/barcelona
 vi src/main/resources/bootstrap.properties
 ```
 
