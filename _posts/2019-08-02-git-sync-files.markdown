@@ -7,6 +7,7 @@ author:     "pinasterist"
 header-img: "img/post-bg-mobilephone.jpg"
 tags:
     - git
+    - hook
     - sync
 ---
 
