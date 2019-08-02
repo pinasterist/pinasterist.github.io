@@ -11,11 +11,11 @@ tags:
     - sync
 ---
 
-这是一篇转载的文章，文章出处为[给git配置钩子实现服务器和客户端代码一致](https://blog.laji.cx/post/git-config-hook-to-sync-code/)。只是这文章名字有点不达意，因此改了个名字放在这里。
+这是一篇转载的文章，文章出处为[给git配置钩子实现服务器和客户端代码一致](https://blog.laji.cx/post/git-config-hook-to-sync-code/)。只是这文章名字有点词不达意，因此改了个标题放在这里。
 
 * * *
 
-# 给git配置钩子实现服务器和客户端代码一致
+## 给git配置钩子实现服务器和客户端代码一致
 
 这是一篇歪门邪道文章，不按常理走，不喜尽管喷。
 
@@ -25,7 +25,7 @@ tags:
 
 咋办呢？搜呗。在网上找到了关于git钩子的相关内容，大概就是在你git操作之后会执行你自己写的钩子，那就用这个了。
 
-首先在服务器新建个仓库，而且要专门配置一下`receive.denyCurrentBranch=ignore`，不然你在本地push的时候会报`remote: error: refusing to update checked out branch: refs/heads/master`的错误，因为`git push`只允许推送到裸仓库，具体可以参考这个stackoverflow的回答
+首先在服务器新建个仓库，而且要专门配置一下`receive.denyCurrentBranch=ignore`，不然你在本地push的时候会报`remote: error: refusing to update checked out branch: refs/heads/master`的错误，因为`git push`只允许推送到裸仓库，具体可以参考这个[stackoverflow](https://stackoverflow.com/questions/12265729/what-are-the-consequences-of-using-receive-denycurrentbranch-in-git)的回答
 
 然后我们来写钩子脚本，有一些没卵用的例子在.git/hooks文件夹下，我们写的脚本也需要放在这里，因为我需要在服务器端写hook，所以对应的应该是写post-receive,这样就会在服务器接手之后执行该脚本
 
