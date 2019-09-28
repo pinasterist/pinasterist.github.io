@@ -28,7 +28,7 @@ tags:
 
 ASCII编码集只使用7个bit来表示字符。7个bit一共可以表示127个字符。ASCII将其分成打印字符和控制字符：打印字符的编码从33到126，共93个；控制字符的编码包括0到32和127，共34个。注意，空格也属于控制字符，因为空格无法打印。其实把空格理解成将打印头右移一个字符位就行。就像回车符就是将打印头移到最左端，换行符就是将纸张前进一行。这34个控制字符又称为C0，请看下图。
 
-![ALT C0 Table](/img/ascii_c0_table.png "C0")
+![ALT C0 Table](/img/in-post/2019-09-28-linux-terminal-program/ascii_c0_table.png "C0")
 
 对终端编程而言，C0控制字符中最有用的是，LF（换行）、CR（回车）、ESC（转义）、HT（TAB）、BS（退格）、SP（空格）、DEL（删除）等，这些字符都是些格式化字符。其他的控制字符很多都是用于控制老式的终端机、通讯线路等。现代终端早已不使用这些字符。但是为了兼容以前的软件，这些字符还保留着。
 
@@ -36,7 +36,7 @@ ASCII编码集只使用7个bit来表示字符。7个bit一共可以表示127个�
 
 CPU所能使用的最小存储单元是8比特的字节，ASCII只用了7比特，这意味还有128个编码是闲置的。为了用上这些资源，人们又制定了新的映射方法。C1控制字符包括128到159共32个编码，如下图所示。
 
-![ALT C1 Table](/img/ascii_c1_table.png "C1")
+![ALT C1 Table](/img/in-post/2019-09-28-linux-terminal-program/ascii_c1_table.png "C1")
 
 这些编码很少被用到，估计制定这个编码的科学家会比较郁闷。
 
@@ -44,12 +44,12 @@ CPU所能使用的最小存储单元是8比特的字节，ASCII只用了7比特�
 
 ISO8859特殊字符很简单，只有两个，包括160和173（二进制分别为A0和AD），主要用在视窗系统和unicode中。如图所示。
 
-![ALT C1 Table](/img/iso8859_special_character_table.png "ISO8859 Special Characters")
+![ALT C1 Table](/img/in-post/2019-09-28-linux-terminal-program/iso8859_special_character_table.png "ISO8859 Special Characters")
 
 
 现在让我们总结一下单字节控制字符的编码。请看下图。
 
-![ALT ISO8859 Special Character Table](/img/iso8859_special_character_table.png "ISO8859 Special Character")
+![ALT ISO8859 Special Character Table](/img/in-post/2019-09-28-linux-terminal-program/control_characters_area.png "Control Character Area")
 
 需要注意的是，图中的方案只是一个比较流行的方案。在其他地方，还有很多其他种类的字符编码，详细情况可以参看这个网址，[International Register of Coded Character Sets](https://www.itscj.ipsj.or.jp/itscj_english/iso-ir/ISO-IR.pdf)。
 
@@ -63,7 +63,7 @@ POSIX标准定义操作系统的几乎所有方方面面的标准，其中就包
 
 注意，不要把这里定义的控制字符和C0、C1的控制字符混为一谈。实际上，这里的20个控制字符，你几乎可以映射到任意一个ASCII字符。
 
-![ALT C1 Table](/img/posix_svr_bsc_control_characters.png POSIX、SVR、BSC控制字符)
+![ALT C1 Table](/img/in-post/2019-09-28-linux-terminal-program/posix_svr_bsc_control_characters.png "POSIX、SVR、BSC控制字符")
 
 我们可以看，POSIX的NL（新行）和CR（回车）对应到C0的LF（换行）和CR（回车），且不可更换。
 
