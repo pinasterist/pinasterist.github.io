@@ -28,7 +28,7 @@ tags:
 
 ASCII编码集只使用7个bit来表示字符。7个bit一共可以表示127个字符。ASCII将其分成打印字符和控制字符：打印字符的编码从33到126，共93个；控制字符的编码包括0到32和127，共34个。注意，空格也属于控制字符，因为空格无法打印。其实把空格理解成将打印头右移一个字符位就行。就像回车符就是将打印头移到最左端，换行符就是将纸张前进一行。这34个控制字符又称为C0，请看下图。
 
-![ALT C0 Table](/img/ascii_c0_table.png C0)
+![ALT C0 Table](/img/ascii_c0_table.png "C0")
 
 对终端编程而言，C0控制字符中最有用的是，LF（换行）、CR（回车）、ESC（转义）、HT（TAB）、BS（退格）、SP（空格）、DEL（删除）等，这些字符都是些格式化字符。其他的控制字符很多都是用于控制老式的终端机、通讯线路等。现代终端早已不使用这些字符。但是为了兼容以前的软件，这些字符还保留着。
 
@@ -36,7 +36,7 @@ ASCII编码集只使用7个bit来表示字符。7个bit一共可以表示127个�
 
 CPU所能使用的最小存储单元是8比特的字节，ASCII只用了7比特，这意味还有128个编码是闲置的。为了用上这些资源，人们又制定了新的映射方法。C1控制字符包括128到159共32个编码，如下图所示。
 
-![ALT C1 Table](/img/ascii_c1_table.png C1)
+![ALT C1 Table](/img/ascii_c1_table.png "C1")
 
 这些编码很少被用到，估计制定这个编码的科学家会比较郁闷。
 
@@ -44,12 +44,12 @@ CPU所能使用的最小存储单元是8比特的字节，ASCII只用了7比特�
 
 ISO8859特殊字符很简单，只有两个，包括160和173（二进制分别为A0和AD），主要用在视窗系统和unicode中。如图所示。
 
-![ALT C1 Table](/img/iso8859_special_character_table.png ISO8859 Special Characters)
+![ALT C1 Table](/img/iso8859_special_character_table.png "ISO8859 Special Characters")
 
 
 现在让我们总结一下单字节控制字符的编码。请看下图。
 
-![ALT ISO8859 Special Character Table](/img/iso8859_special_character_table.png ISO8859 Special Character)
+![ALT ISO8859 Special Character Table](/img/iso8859_special_character_table.png "ISO8859 Special Character")
 
 需要注意的是，图中的方案只是一个比较流行的方案。在其他地方，还有很多其他种类的字符编码，详细情况可以参看这个网址，[International Register of Coded Character Sets](https://www.itscj.ipsj.or.jp/itscj_english/iso-ir/ISO-IR.pdf)。
 
@@ -57,7 +57,7 @@ ISO8859特殊字符很简单，只有两个，包括160和173（二进制分别�
 
 上面我们说到控制字符的编码有很多种，那么字符设备到底用哪种呢？设备厂商可不愿意被绑在某个特定的编码上，毕竟兼容性越强，越有可能打开销路。因此， 很多字符设备的控制标准被提出来。
 
-### Posix.1 + SVR4 + 4.3+BSD 控制字符
+### Posix.1、SVR4和4.3+BSD控制字符
 
 POSIX标准定义操作系统的几乎所有方方面面的标准，其中就包括字符设备的标准。为了控制字符设备，POSIX定义了7种控制字符。另外再加上SVR和BSD这两个UNIX变种分别定义的6个和7个控制字符，UNIX终端设备总共使用20个控制字符。如下图所示。
 
@@ -119,7 +119,7 @@ struct termios {
 
 各个字段的选项如下(不是所有UNIX系统都支持)：
 
-==c_iflag==：
+**c_iflag**：
 
 * BRKINT：接到BREAK时产生SIGINT；
 * ICRNL：将输入的CR转换为NL；
@@ -136,7 +136,7 @@ struct termios {
 * IXON：使起动/停止输出控制流起作用；
 * PARMRK：标记奇偶错；
 
-==c_oflag==：
+**c_oflag**：
 
 * BSDLY：退格延迟屏蔽(仅SVR4)；
 * CRDLY：CR延迟屏蔽(仅SVR4)；
@@ -155,7 +155,7 @@ struct termios {
 * TABDLY：水平制表符延迟屏蔽(仅SVR4)；
 * VTDLY：垂直制表符延迟屏蔽(仅SVR4)；
 
-==c_cflag==：
+**c_cflag**
 
 * CCTS_OFLOW：输出的CTS流控制(仅4.3+BSD)；
 * CIGNORE：忽略控制标志(仅4.3+BSD)；
@@ -169,7 +169,7 @@ struct termios {
 * PARENB：进行奇偶校；
 * PARODD：奇校，否则为偶校；
 
-==c_lflag==：
+**c_lflag**：
 
 * ALTWERASE：使用替换WERASE算法(仅4.3+BSD)；
 * ECHO：进行回送；
@@ -252,7 +252,7 @@ struct termios {
 * VTDLY：(c_oflag, SVR4)垂直制表延迟屏蔽。此屏蔽的值是VT0或VT1。
 * XCASE：(c_lflag, SVR4)如若设置，并且ICANON也设置，则认为终端是大写终端，所以输入都变换为小写。为了输入一个大写字符，在其前加一个\。与之类似，输出一个大写字符也在其前加一个\(这一标志已经过时，现在几乎所有终端都支持大、小写字符)。
 
-关于POSIX终端规范，更详细的内容可以参看[IEEE Std 1003.1-2017](https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap11.html#tag_11_01_09}
+关于POSIX终端规范，更详细的内容可以参看[IEEE Std 1003.1-2017](https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap11.html#tag_11_01_09)
 
 
 
