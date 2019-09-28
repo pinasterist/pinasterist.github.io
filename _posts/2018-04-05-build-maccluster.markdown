@@ -114,13 +114,15 @@ vi /etc/pf.conf
     ```
 scrub-anchor "com.apple/*"
 nat-anchor "com.apple/*"
-nat on en0 from vboxnet0:network to any -> (en0)  # insert this line
-nat on en6 from vboxnet0:network to any -> (en6)  # insert this line
 rdr-anchor "com.apple/*"
+
+nat on {en0, en6} from vboxnet0:network to any -> {en0, en6}
+rdr pass on {en0, en6} inet proto {tcp, udp} from any to any port 80 -> 192.168.98.201 port 8080
+pass from 192.168.98.0/24 to any keep state
+
 dummynet-anchor "com.apple/*"
 anchor "com.apple/*"
 load anchor "com.apple" from "/etc/pf.anchors/com.apple"
-pass from 192.168.98.0/24 to any keep state       # insert this line
 ```
     执行下列命令使之生效
     ```shell
