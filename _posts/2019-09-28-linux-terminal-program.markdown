@@ -21,7 +21,6 @@ tags:
 
 字符编码有非常多。对于终端编程来说，最重要的是ASCII编码。当然，8859-n编码也需要稍微提一下。
 
-
 ### ASCII和C0控制字符
 
 最开始的终端其实就是一台打印机，通过键盘输入，通过纸张输出。终端本身没有计算能力，他唯一的任务就是连接到大型机，为大型机提供一个输入输出通道。ASCII编码就是那个时候发明的。
@@ -61,11 +60,11 @@ ISO8859特殊字符很简单，只有两个，包括160和173（二进制分别�
 
 POSIX标准定义操作系统的几乎所有方方面面的标准，其中就包括字符设备的标准。为了控制字符设备，POSIX定义了7种控制字符。另外再加上SVR和BSD这两个UNIX变种分别定义的6个和7个控制字符，UNIX终端设备总共使用20个控制字符。如下图所示。
 
-注意，不要把这里定义的控制字符和C0、C1的控制字符混为一谈。实际上，这里的20个控制字符，你几乎可以映射到任意一个ASCII字符。
+注意，不要把这里定义的控制字符和C0、C1的控制字符混为一谈。实际上，这里的20个控制字符（除NL和CR）几乎可以被映射到任意一个ASCII字符。
 
 ![ALT C1 Table](/img/in-post/2019-09-28-linux-terminal-program/posix_svr_bsc_control_characters.png "POSIX、SVR、BSC控制字符")
 
-我们可以看，POSIX的NL（新行）和CR（回车）对应到C0的LF（换行）和CR（回车），且不可更换。
+注意，POSIX的NL（新行）和CR（回车）对应到C0的LF（换行）和CR（回车），且不可更换。
 
 ### Posix的终端IO函数
 
@@ -252,8 +251,6 @@ struct termios {
 * VTDLY：(c_oflag, SVR4)垂直制表延迟屏蔽。此屏蔽的值是VT0或VT1。
 * XCASE：(c_lflag, SVR4)如若设置，并且ICANON也设置，则认为终端是大写终端，所以输入都变换为小写。为了输入一个大写字符，在其前加一个\。与之类似，输出一个大写字符也在其前加一个\(这一标志已经过时，现在几乎所有终端都支持大、小写字符)。
 
-关于POSIX终端规范，更详细的内容可以参看[IEEE Std 1003.1-2017](https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap11.html#tag_11_01_09)
-
-
+关于POSIX终端规范，更详细的内容可以参看[IEEE Std 1003.1-2017](https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap11.html#tag_11_01_09)。
 
 
