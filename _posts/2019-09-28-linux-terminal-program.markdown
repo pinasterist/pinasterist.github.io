@@ -45,12 +45,23 @@ ISO8859特殊字符很简单，只有两个，包括160和173（二进制分别�
 
 ![ALT C1 Table](/img/in-post/2019-09-28-linux-terminal-program/iso8859_special_character_table.png "ISO8859 Special Characters")
 
+### 单字节控制字符
 
-现在让我们总结一下单字节控制字符的编码。请看下图。
+C0、C1、ISO8859加起来，就是单字节控制字符。现在让我们总结一下单字节控制字符的编码。请看下图。
 
 ![ALT ISO8859 Special Character Table](/img/in-post/2019-09-28-linux-terminal-program/control_characters_area.png "Control Character Area")
 
 需要注意的是，图中的方案只是一个比较流行的方案。在其他地方，还有很多其他种类的字符编码，详细情况可以参看这个网址，[International Register of Coded Character Sets](https://www.itscj.ipsj.or.jp/itscj_english/iso-ir/ISO-IR.pdf)。
+
+### 多字节控制字符
+
+单字节控制字符的数量有限，只有34+32+2=68个。这些字符对早期的简单终端是够用的。但是，随着计算机IO技术的发展，特别是虚拟终端的出现，终端的配置越来越复杂，68个字符早已不敷使用。为了解决这个问题，多字节的控制字符就不得不制定出来。
+
+为了和单字节控制字符兼容，所有的多字节控制字符由前导符开始。前导符包括双字节前导符（一个ESC字符和一个左方括号字符）和单字节前导符（CPI），两者作用相同，可以互相替代或者混用。前导符后面的字符就由终端来解释。终端型号繁多，而且也没有一个标准，因而这一部分的定义或解释多种多样。每个终端企业都有自己的标准。计算机软件厂商为了兼容市面上的终端，不得不把这些终端驱动集成在一起，这才导致今天终端控制的复杂性。
+
+现在，最流行的终端标准是xterm、vt100等，因而下面的介绍主要围绕这两种标准展开。
+
+
 
 # 字符设备控制标准
 
