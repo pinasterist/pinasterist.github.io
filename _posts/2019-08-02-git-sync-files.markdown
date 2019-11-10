@@ -35,6 +35,16 @@ GIT_WORK_TREE=$PWD git reset --hard
 echo "ok"
 ```
 
+有时候这个脚本不起作用，可以尝试下面的方案：
+
+```
+#!/bin/sh
+test "${PWD%/.git}" != "$PWD" && cd ..
+unset GIT_DIR GIT_WORK_TREE
+git reset --hard
+echo "branch updated"
+```
+
 然后执行`chmod +x .git/hooks/post-receive` 给它执行权限
 
 最后一句ok没什么用，你写的操作会在客户端推送的时候执行并能看到结果，以remote开头就像这样
