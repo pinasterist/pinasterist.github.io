@@ -142,3 +142,26 @@ Smartctl open device: /dev/disk5 failed: Operation not supported by device
 
 原因是出在USB中。原来smartmontools通过发送ATA命令获取磁盘信息。但是移动硬盘并非直连主板，而是中间插了个USB，导致ATA命令无法发送。解决方案自然是想办法将ATA命令通过USB直接发送过去（pass-through）。网络上有个开源的MacOS驱动就是这么干的。点击<https://github.com/kasbert/OS-X-SAT-SMART-Driver>查看更详细信息。自己编译安装略显麻烦，好在已经有人帮忙做了个带签名的驱动<https://binaryfruit.com/drivedx/usb-drive-support>。按照说明安装后，smartmontools就可以愉快滴在MacOS中执行了。
 
+下面的表格是smart部分字段的解释：
+
+```tsx
+ID# ATTRIBUTE_NAME          
+  1 Raw_Read_Error_Rate     读取错误率
+  3 Spin_Up_Time            起转时间
+  4 Start_Stop_Count        启动停止次数
+  5 Reallocated_Sector_Ct   重新分配扇区计数
+  7 Seek_Error_Rate         寻道错误率
+  9 Power_On_Hours          通电时间
+ 10 Spin_Retry_Count        起转重试次数
+ 11 Calibration_Retry_Count 重新校准重试次数
+ 12 Power_Cycle_Count       启动<->关闭循环次数
+192 Power-Off_Retract_Count 断电磁头缩回计数
+193 Load_Cycle_Count        磁头加载/卸载循环计数
+194 Temperature_Celsius     温度
+196 Reallocated_Event_Count 在分配扇区物理位置事件计数（与坏道无关）
+197 Current_Pending_Sector  当前等待中扇区数（状态存疑/不稳定-等待后续判断）
+198 Offline_Uncorrectable   无法修正的扇区总数
+199 UDMA_CRC_Error_Count    UltraDMA CRC错误计数
+200 Multi_Zone_Error_Rate   写入错误率
+```
+
