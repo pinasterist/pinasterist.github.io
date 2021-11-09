@@ -131,7 +131,7 @@ Selective self-test flags (0x0):
 If Selective self-test is pending on power-up, resume after 0 minute delay.
 ```
 
-但是，MacOS中使用smartmontools却只能查看本地磁盘的信息，移动硬盘是无效的，只会得到下面的回执：
+但是，MacOS中使用smartmontools只能查看本地磁盘的信息，移动硬盘是无效的，只会得到下面的回执：
 
 ```
 smartctl 7.2 2020-12-30 r5155 [Darwin 21.1.0 arm64] (local build)
@@ -140,5 +140,5 @@ Copyright (C) 2002-20, Bruce Allen, Christian Franke, www.smartmontools.org
 Smartctl open device: /dev/disk5 failed: Operation not supported by device
 ```
 
-原因是出在USB中。原来smartmontools通过发送ATA命令获取磁盘信息。但是移动硬盘并非直连主板，而是中间插了个USB，导致ATA命令无法发送。解决方案自然是想办法将ATA命令通过USB直接发送过去（pass-through）。网络上有个开源的MacOS驱动就是这么干的。点击https://github.com/kasbert/OS-X-SAT-SMART-Driver查看更详细信息。自己编译安装略显麻烦，好在已经有人帮忙做了个带签名的驱动https://binaryfruit.com/drivedx/usb-drive-support。按照说明安装后，smartmontools就可以愉快滴在MacOS中执行了。
+原因是出在USB中。原来smartmontools通过发送ATA命令获取磁盘信息。但是移动硬盘并非直连主板，而是中间插了个USB，导致ATA命令无法发送。解决方案自然是想办法将ATA命令通过USB直接发送过去（pass-through）。网络上有个开源的MacOS驱动就是这么干的。点击<https://github.com/kasbert/OS-X-SAT-SMART-Driver>查看更详细信息。自己编译安装略显麻烦，好在已经有人帮忙做了个带签名的驱动<https://binaryfruit.com/drivedx/usb-drive-support>。按照说明安装后，smartmontools就可以愉快滴在MacOS中执行了。
 
