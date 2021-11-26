@@ -13,7 +13,7 @@ tags:
 
 ---
 
-# 下面是常用的application.yaml文件中的logback配置项
+### 常用logback配置项
 
 ```
 logging:
@@ -27,7 +27,7 @@ logging:
     root: INFO
 ```
 
-# 下面是格式化字符串
+### 格式字符串
 
 ```
 %d{HH:mm:ss.SSS} : 日志输出时间
@@ -38,7 +38,7 @@ logging:
 %n               : 平台的换行符
 ```
 
-# 颜色支持
+### 颜色支持
 
 使用%clr变量可以给日志加上颜色。
 
@@ -58,18 +58,18 @@ red
 yellow
 ```
 
-# 文件输出
+### 文件输出
 
 文件输出涉及到两个变量：logging.file.name 和 logging.file.path
 
 | logging.file.name | logging.file.path | 例子 | 解释 |
 | --- | ----------------------- | -------------------------- |
-| (none) | (none) | 打印到终端 |
+| (none) | (none) |   | 打印到终端 |
 | 文件 | (none) | my.log | 写入到指定文件，文件名可以是绝对路径，也可以是相对路径 |
 | (none) | 目录 | /var/log | 在指定目录，写入到spring.log，目录名可以是绝对路径，也可以是相对路径 |
 
 
-# 文件分割
+### 文件分割
 
 日志文件自动分割保存涉及到以下5个变量
 
@@ -81,4 +81,8 @@ yellow
 | logging.logback.rollingpolicy.total-size-cap | 100MB | 所有日志文件的最大容量
 | logging.logback.rollingpolicy.max-history | 7 | 最多保存几个日志文件
 
+
+### 参考网址
+
+<https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.logging>
 
