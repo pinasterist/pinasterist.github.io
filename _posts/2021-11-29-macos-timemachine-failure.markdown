@@ -20,6 +20,7 @@ tags:
 为了省事，我直接上谷歌看看有没有现成的答案。这一找还真有。在威锋网上，找到两篇帖子。
 
 <https://www.feng.com/post/13509451>
+
 <http://www.feng.com/post/13511333>
 
 大概意思是有几个文件夹被锁，导致时间机器挂住，无法完成备份。其中有位网友还给出了方法。我不禁大喜，马上按图索骥，操作起来。
@@ -39,7 +40,7 @@ tm.log文件内容太多，使用下列命令过滤一下。
 ```
 cat tm.log | grep 'Failed to acquire device lock'  > tm2.log
 cat tm2.log | cut -d ' ' -f 48 > tm3.log
-cat tm3.log | sed 's#.*(/Users.*)#$\1#g' > tm4.log
+cat tm3.log | sed 's#.*(/Users.*)#$1#g' > tm4.log
 cat tm4.log | sort -u > tm5.log 
 ```
 
@@ -76,11 +77,11 @@ cat tm4.log | sort -u > tm5.log
 ```
 ~/Library/Containers/A7F256E7-E6CB-48F4-BE3B-5F3759D8B5D2/Data/Library/TalkingData  ls -la
 total 24
-drwxr-xr-x@  5 pj  staff   160 Apr 29  2021 .
-drwx------  43 pj  staff  1376 Apr 29  2021 ..
--rw-r--r--@  1 pj  staff    16 Apr 29  2021 TDAA.TD_SendMessage_AppAnalytics
--rw-r--r--@  1 pj  staff    16 Apr 29  2021 TDAA.TD_SendMessage_TXEnv
--rw-r--r--@  1 pj  staff   208 Apr 29  2021 TDAA.TmpData_v1
+drwxr-xr-x@  5 ${username}  staff   160 Apr 29  2021 .
+drwx------  43 ${username}  staff  1376 Apr 29  2021 ..
+-rw-r--r--@  1 ${username}  staff    16 Apr 29  2021 TDAA.TD_SendMessage_AppAnalytics
+-rw-r--r--@  1 ${username}  staff    16 Apr 29  2021 TDAA.TD_SendMessage_TXEnv
+-rw-r--r--@  1 ${username}  staff   208 Apr 29  2021 TDAA.TmpData_v1
 ```
 
 感觉是用来搜集调试信息的，估计不是什么关键信息，直接删除。后来回想这是不对滴，应该先备份。)-0
