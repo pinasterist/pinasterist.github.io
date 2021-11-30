@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      "TimeMachine无法备份了"
-subtitle:   "升级Monterey后时间机器挂住的解决过程"
+title:      "解决Monterey中TimeMachine无法备份的问题"
+subtitle:   "升级Monterey后遗症之一：时间机器挂住"
 date:       2021-11-28
 author:     "pinasterist"
 header-img: "img/post-bg-mobilephone.jpg"
