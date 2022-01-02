@@ -20,9 +20,9 @@ logging:
   pattern:
     file: "%date{yyyy-MM-dd HH:mm:ss.SSS} - %5.5level %-10.10thread - %20.20logger{20} %-4.4L : %msg%n"
     console: "%date{yyyy-MM-dd HH:mm:ss.SSS} - %5.5level %-10.10thread - %20.20logger{20} %-4.4L : %msg%n"
-  path: "./logs/"
-  file: "./logs/my.log"
-  file.max-size: 10MB
+  file:
+    path: "./logs/"
+    name: "./logs/my.log"
   level:
     root: INFO
 ```
