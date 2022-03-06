@@ -174,3 +174,59 @@ sed -e 's/bin/tank/g;3q' test
 # 特殊匹配，匹配数字别忘了中括号外面还有一个中括号。
 sed -ne '2,15s/zhangy.*[[:digit:]]/=======/gp'  test
 ```
+
+```
+# 删除1，14行
+sed -e '1,14d' test
+# 删除4以后的行，包括第4行，把$当成最大行数就行了。
+sed -e '4,$d' test
+# 删除包括false的行，或者包括bash的行，别忘了加\
+sed -e '/\(false\|bash\)$/d' test
+# 删除从匹配root的行，到匹配以test开头的行，中间的行
+sed -e '/root/,/^test/d' test
+```
+
+```
+# 读取test2的内容，并将其写入到匹配行的下面
+sed -e '/^root/r test2' test
+# 将匹配数字的行，写入test2中
+sed '/[[:digit:]]/w test2' test
+# 将要插入的东西，插入匹配行的下面
+sed  '/root/a\\ ===aaaa====' test
+# 正好根a相反，将要插入的东西，插入到匹配行的上面
+sed '/^daemon/i\\=================' test
+```
+
+```
+# 取得一个文件(或目录)路径的父目录,s@@@为替换格式,\(/.*/\)是指一个"/"后面跟了任意字符又跟了一个"/",其中\(\)是用来把匹配内容作为一个整体后向引用,[^/]\{1,\}是指一个非"/"字符出现了一次,两次,或多次;/\?是指"/"出现了0次或1次,\1是后向引用前面匹配的内容
+echo "/usr/local/bin/" |sed 's@\(/.*/\)[^/]\{1,\}/\?@\1@'
+# 使用扩展正则表达式后,亦可如此:
+echo "/etc/rc.d/rc.sysinit" | sed -r 's@(/.*/)[^/]+/?@\1@'
+```
+
+```
+# 替换第3行的每个my为your，若没有则无替换
+sed \"3s/my/your/g\" pets.txt 
+# 替换每行第3个my
+sed \"s/my/your/3\" pets.txt 
+# 只替换第3行的第1个my
+sed \"3s/my/your/1\" pets.txt 
+# 替换3~6行，每个my
+sed \"3,6s/my/your/g\" pets.txt
+# 只替换每行的第2个以后的my
+sed \'s/my/your/3g\' pets.txt
+```
+
+```
+# 注释匹配到的整行
+sed -i 's/^[^#].*netmask/#&/' change_network.yml 
+```
+
+```
+# 把 MyScanActivity.java 文件中 /*...*/之间的内容删除
+sed -i '/\/\*/,/\*\//'D ./MyScanActivity.java
+```
+
+```
+sed -rn 's#^UUID=(.*) /.*#\1#p' /etc/fstab
+```
