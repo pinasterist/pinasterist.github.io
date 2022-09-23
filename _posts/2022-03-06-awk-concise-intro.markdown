@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      "SED简单介绍"
-subtitle:   "常用的SED命令"
+title:      "AWK简单介绍"
+subtitle:   "常用的AWK命令"
 date:       2022-03-06
 author:     "pinasterist"
 header-img: "img/post-bg-mobilephone.jpg"
@@ -412,3 +412,4 @@ You have mail in /var/spool/mail/root
 32
 499
 ```
+
